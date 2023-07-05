@@ -1,9 +1,43 @@
 <!doctype html>
 <html>
-  <body>
-    <h1>Model Predictions</h1>
-    <p>Logistic Regression Prediction: {{ lr_prediction }}</p>
-    <p>Random Forest Prediction: {{ rf_prediction }}</p>
-    <p>SVM Prediction: {{ svm_prediction }}</p>
-  </body>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Predictions | FraudGuard</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Predictions</h1>
+
+    <div class="card mb-3">
+      <div class="card-header">Logistic Regression</div>
+      <div class="card-body">
+        <p>Fraudulent transactions: <span class="font-weight-bold">{{ lr_fraud }}</span></p>
+        <p>Non-fraudulent transactions: <span class="font-weight-bold">{{ lr_non_fraud }}</span></p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Random Forest</div>
+      <div class="card-body">
+        <p>Fraudulent transactions: <span class="font-weight-bold">{{ rf_fraud }}</span></p>
+        <p>Non-fraudulent transactions: <span class="font-weight-bold">{{ rf_non_fraud }}</span></p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">SVM</div>
+      <div class="card-body">
+        <p>Fraudulent transactions: <span class="font-weight-bold">{{ svm_fraud }}</span></p>
+        <p>Non-fraudulent transactions: <span class="font-weight-bold">{{ svm_non_fraud }}</span></p>
+      </div>
+    </div>
+
+    <div class="text-center mt-3">
+      <a href="/" class="btn btn-primary">Make Another Prediction</a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

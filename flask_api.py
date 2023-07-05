@@ -7,14 +7,18 @@ import joblib
 # Initialize Flask application
 app = Flask(__name__)
 
+# If upload directory does not exist, create it
+if not os.path.exists('static/uploads'):
+    os.makedirs('static/uploads')
+
 # Folder to upload files
 UPLOAD_FOLDER = './static/uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Load models globally (at application startup)
-log_reg = joblib.load("./models/logistic_regression.pkl")
-ran_for = joblib.load("./models/random_forest.pkl")
-svm_clf = joblib.load("./models/svm.pkl")
+log_reg = joblib.load("log_reg_model.pkl")
+ran_for = joblib.load("ran_for_model.pkl")
+svm_clf = joblib.load("svm_clf_model.pkl")
 
 @app.route('/')
 def home():
@@ -42,12 +46,21 @@ def upload_file():
             # Load the dataset
             data = pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-            # Perform predictions using pre-loaded models
-            lr_prediction = log_reg.predict(data)
-            rf_prediction = ran_for.predict(data)
-            svm_prediction = svm_clf.predict(data)
+        # Perform predictions using pre-loaded models
+        lr_prediction = log_reg.predict(data)
+        rf_prediction = ran_for.predict(data)
+        svm_prediction = svm_clf.predict(data)
 
-            return render_template('result.html', lr_prediction=lr_prediction, rf_prediction=rf_prediction, svm_prediction=svm_prediction)
+        # Count the number of fraudulent and non-fraudulent transactions
+        lr_fraud = sum(lr_prediction)
+        rf_fraud = sum(rf_prediction)
+        svm_fraud = sum(svm_prediction)
+
+        lr_non_fraud = len(lr_prediction) - lr_fraud
+        rf_non_fraud = len(rf_prediction) - rf_fraud
+        svm_non_fraud = len(svm_prediction) - svm_fraud
+
+        return render_template('result.html', lr_fraud=lr_fraud, rf_fraud=rf_fraud, svm_fraud=svm_fraud, lr_non_fraud=lr_non_fraud, rf_non_fraud=rf_non_fraud, svm_non_fraud=svm_non_fraud)
 
 if __name__ == "__main__":
     app.run(debug=True)
