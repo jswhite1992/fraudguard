@@ -1,32 +1,53 @@
-from flask import Flask, request, jsonify
-import joblib
+from flask import Flask, render_template, request
+from werkzeug.utils import secure_filename
 import pandas as pd
-import numpy as np
+import os
+import joblib
 
+# Initialize Flask application
 app = Flask(__name__)
 
-# Load the model from the file you saved it to
-model = joblib.load('models/fraud_model.pkl')
+# Folder to upload files
+UPLOAD_FOLDER = './static/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    # Get the data from the POST request
-    data = request.get_json(force=True)
+# Load models globally (at application startup)
+log_reg = joblib.load("./models/logistic_regression.pkl")
+ran_for = joblib.load("./models/random_forest.pkl")
+svm_clf = joblib.load("./models/svm.pkl")
 
-    # Convert the incoming json to pandas DataFrame
-    incoming_data = pd.DataFrame(data)
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-    # Make prediction using model loaded from disk
-    prediction = model.predict(incoming_data)
+@app.route('/', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        # Check if a file is selected
+        if 'file' not in request.files:
+            return "No file uploaded."
 
-    # Take the first value of prediction
-    output = prediction[0]
+        # Get the file
+        file = request.files['file']
 
-    # Return the prediction
-    return jsonify(int(output))
+        # If the user does not select a file, browser submits an empty file without a filename
+        if file.filename == '':
+            return "No selected file."
 
-if __name__ == '__main__':
-    try:
-        app.run(port=5000, debug=True)
-    except:
-        print("Server is exited unexpectedly. Please check the server.")
+        # Save the uploaded file
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            # Load the dataset
+            data = pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            # Perform predictions using pre-loaded models
+            lr_prediction = log_reg.predict(data)
+            rf_prediction = ran_for.predict(data)
+            svm_prediction = svm_clf.predict(data)
+
+            return render_template('result.html', lr_prediction=lr_prediction, rf_prediction=rf_prediction, svm_prediction=svm_prediction)
+
+if __name__ == "__main__":
+    app.run(debug=True)
