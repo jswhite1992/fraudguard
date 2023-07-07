@@ -1,6 +1,6 @@
 ## Fraudguard
 
-This repository is dedicated to revolutionizing the security of online transactions by harnessing the power of state-of-the-art machine learning algorithms. With the exponential growth of online transactions, the need for robust fraud detection mechanisms has become paramount. FraudGuard ML combines cutting-edge data analytics techniques with advanced predictive modeling to proactively identify potentially fraudulent credit card transactions, adding an indispensable layer of protection in the constantly evolving landscape of online commerce. By leveraging the vast amounts of transactional data, FraudGuard ML learns intricate patterns and trends, enabling it to effectively flag potential fraud in real time.
+This repository is dedicated to revolutionizing the security of online transactions by harnessing the power of state-of-the-art machine learning algorithms. With the exponential growth of online transactions, the need for robust fraud detection mechanisms has become paramount. FraudGuard ML combines cutting-edge data analytics techniques with advanced predictive modeling to proactively identify potentially fraudulent credit card transactions, adding an indispensable layer of protection in the constantly evolving landscape of online commerce. By leveraging the vast amounts of transactional data, FraudGuard ML learns intricate patterns and trends, enabling it to effectively flag potential fraud.
 
 Last Updated: 2023-07-05.
 
