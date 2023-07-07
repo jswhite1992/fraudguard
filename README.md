@@ -12,7 +12,7 @@ Last Updated: 2023-07-05.
 - **Programming Language:** Python
 - **Libraries:** Pandas, pathlib, plotly, scikit-learn, numpy, matplotlib,seaborn, imbalanced-learn, pipeline and column transformer, randomizedSearchCV, warninngs, flask, Werkzeug, os, joblib
 
-- **Framework:** JupyterLab
+- **Framework:** JupyterLab, Flask
 - **Operating Systems:** Mac OS, Microsoft Windows
 
 ---
