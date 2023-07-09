@@ -19,6 +19,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 log_reg = joblib.load("log_reg_model.pkl")
 ran_for = joblib.load("ran_for_model.pkl")
 svm_clf = joblib.load("svm_clf_model.pkl")
+xgb_clf = joblib.load("xgb_clf_model.pkl")  # added
 
 @app.route('/')
 def home():
@@ -50,17 +51,22 @@ def upload_file():
         lr_prediction = log_reg.predict(data)
         rf_prediction = ran_for.predict(data)
         svm_prediction = svm_clf.predict(data)
+        xgb_prediction = xgb_clf.predict(data)  # added
 
         # Count the number of fraudulent and non-fraudulent transactions
         lr_fraud = sum(lr_prediction)
         rf_fraud = sum(rf_prediction)
         svm_fraud = sum(svm_prediction)
+        xgb_fraud = sum(xgb_prediction)  # added
 
         lr_non_fraud = len(lr_prediction) - lr_fraud
         rf_non_fraud = len(rf_prediction) - rf_fraud
         svm_non_fraud = len(svm_prediction) - svm_fraud
+        xgb_non_fraud = len(xgb_prediction) - xgb_fraud  # added
 
-        return render_template('result.html', lr_fraud=lr_fraud, rf_fraud=rf_fraud, svm_fraud=svm_fraud, lr_non_fraud=lr_non_fraud, rf_non_fraud=rf_non_fraud, svm_non_fraud=svm_non_fraud)
+        return render_template('result.html', 
+                               lr_fraud=lr_fraud, rf_fraud=rf_fraud, svm_fraud=svm_fraud, xgb_fraud=xgb_fraud,  # modified
+                               lr_non_fraud=lr_non_fraud, rf_non_fraud=rf_non_fraud, svm_non_fraud=svm_non_fraud, xgb_non_fraud=xgb_non_fraud)  # modified
 
 if __name__ == "__main__":
     app.run(debug=True)
