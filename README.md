@@ -10,7 +10,7 @@ Last Updated: 2023-07-05.
 ## *Technologies*
 
 - **Programming Language:** Python
-- **Libraries:** Pandas, pathlib, plotly, scikit-learn, numpy, matplotlib,seaborn, imbalanced-learn, pipeline and column transformer, randomizedSearchCV, warninngs, flask, Werkzeug, os, joblib
+- **Libraries:** Pandas, pathlib, plotly, scikit-learn, numpy, matplotlib,seaborn, imbalanced-learn, pipeline and column transformer, randomizedSearchCV, warninngs, flask, Werkzeug, os, joblib, ks_2sample, resample and xgb.
 
 - **Framework:** JupyterLab, Flask
 - **Operating Systems:** Mac OS, Microsoft Windows
@@ -42,6 +42,7 @@ Activate conda enviorment by running the following function:
         pip install Flask
         pip install Werkzeug
         pip install plotly
+        pip install xgboost
 
 
 
