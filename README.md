@@ -170,6 +170,54 @@ Note: Make sure the three model files `log_reg_model.pkl`, `ran_for_model.pkl`, 
 - [werkzeug usage](https://pypi.org/project/Werkzeug/)
 ---
 
+## *Summary*
+
+The analysis conducted on the credit card transaction fraud dataset yielded the following results:
+
+1. Data Preprocessing:
+   - Duplicates Removal: Duplicate rows were removed from the dataset to ensure data integrity.
+   - Column Removal: The 'Time' column was dropped as it was not considered relevant for the analysis.
+   - Null Values Check: No null values were found in the dataset.
+   - Outlier Removal: Outliers in the 'Amount' column were identified and removed using the IQR method.
+   - Standardization: The 'Amount' column was standardized using the StandardScaler.
+
+2. Feature Selection and Engineering:
+   - Data Split: The dataset was split into training and testing sets.
+   - Class Distribution: The class distribution of fraudulent and non-fraudulent transactions was calculated and visualized.
+
+3. Model Building and Evaluation:
+   - Logistic Regression: A logistic regression model was built and evaluated. The model achieved high accuracy, precision, and recall on the training data. On the testing data, it performed well with high accuracy, precision, and recall scores.
+
+   - Random Forest Classifier: A random forest classifier model was built and evaluated. The model demonstrated excellent performance on both the training and testing data, achieving high accuracy, precision, and recall scores.
+
+   - Support Vector Machine (SVM) Classifier: An SVM classifier model was built and evaluated. The SVM model performed well on both the training and testing data, achieving high accuracy, precision, and recall scores.
+
+4. XGBoost Classifier:
+   - Confusion Matrix for Testing Predictions:
+     ```
+     [[31778     6]
+      [    8    35]]
+     ```
+   - Accuracy of the XGBoost Classifier on the Test Dataset: 0.999560121909071
+   - Classification Report for the Testing Predictions:
+     ```
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     31784
+           1       0.85      0.81      0.83        43
+
+    accuracy                           1.00     31827
+   macro avg       0.93      0.91      0.92     31827
+weighted avg       1.00      1.00      1.00     31827
+     ```
+
+5. KS Test:
+   - KS Statistic: 0.32856289127974003
+   - p-value: 5.296912427603326e-28
+
+Overall, the analysis showed that all models, including logistic regression, random forest classifier, SVM classifier, and XGBoost classifier, demonstrated high accuracy, precision, and recall in predicting fraudulent transactions. The XGBoost classifier achieved an accuracy of 0.99956 and performed well in distinguishing between fraudulent and non-fraudulent transactions. The KS test indicated a significant difference in the distribution of the 'Amount' feature between fraudulent and non-fraudulent transactions. These results suggest that the developed models and the identified feature can be useful in detecting and preventing credit card fraud.
+
+---
 ## *Contributors*
 
 **Rosalinda Olvera Fernandez**
