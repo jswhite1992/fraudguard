@@ -206,9 +206,10 @@ The analysis conducted on the credit card transaction fraud dataset yielded the 
            0       1.00      1.00      1.00     31784
            1       0.85      0.81      0.83        43
 
-    accuracy                           1.00     31827
-   macro avg       0.93      0.91      0.92     31827
-weighted avg       1.00      1.00      1.00     31827
+     ```
+     accuracy                               1.00     31827
+     macro avg          0.93      0.91      0.92     31827
+     weighted avg       1.00      1.00      1.00     31827
      ```
 
 5. KS Test:
